@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Dish | Fresh Deals, Zero Waste</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts for a friendly, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Custom styles for 3D effects and animations -->
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #F8F7F2;
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .perspective-container { perspective: 1000px; }
+        .card-3d {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+        .perspective-container:hover .card-3d {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .perspective-container:nth-child(even):hover .card-3d {
+             transform: rotateY(-10deg) rotateX(5deg) scale(1.05);
+        }
+        .card-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 75%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            transition: left 0.6s ease;
+        }
+        .perspective-container:hover .card-3d::before { left: 150%; }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+        .floating-shape {
+            position: absolute;
+            background-color: rgba(167, 243, 208, 0.5);
+            border-radius: 30%;
+            filter: blur(8px);
+            animation: float 15s ease-in-out infinite;
+            z-index: 0;
+        }
+        .shape1 { width: 120px; height: 120px; top: 10%; left: 15%; animation-duration: 17s; }
+        .shape2 { width: 60px; height: 60px; top: 20%; right: 20%; animation-duration: 13s; animation-delay: 2s; }
+        .shape3 { width: 160px; height: 160px; bottom: 15%; right: 10%; animation-duration: 20s; }
+        .shape4 { width: 80px; height: 80px; bottom: 25%; left: 10%; animation-duration: 11s; animation-delay: 3s; }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <!-- Header Section -->
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-emerald-600 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-500" viewBox="0 0 24 24" fill="currentColor"><path d="M22,9.333V8H2V9.333a9.998,9.998,0,0,0,2.158,6.334L4,22H20l-.158-6.333A9.998,9.998,0,0,0,22,9.333ZM12,2a8,8,0,0,0-8,8v.667h16V10A8,8,0,0,0,12,2Z"/></svg>
+                <span class="font-serif">Daily Dish</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero-section" class="relative bg-gradient-to-br from-emerald-50 to-green-100 py-20 md:py-32 overflow-hidden">
+            <div class="floating-shape shape1"></div>
+            <div class="floating-shape shape2"></div>
+            <div class="floating-shape shape3"></div>
+            <div class="floating-shape shape4"></div>
+            <div id="hero-content" class="container mx-auto px-6 text-center relative z-10 transition-transform duration-300 ease-out">
+                <h1 class="text-4xl md:text-6xl font-serif font-bold text-stone-800 mb-4">Good Food Should Be Eaten, <br class="hidden md:block"> Not Wasted.</h1>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto mb-8">Connecting local shops with savvy shoppers to give delicious food a second chance.</p>
+                <a href="#deals-section" class="inline-block bg-emerald-500 text-white font-bold py-3 px-8 rounded-full hover:bg-emerald-600 focus:outline-none focus:ring-4 focus:ring-emerald-300 transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">Find Deals Near You</a>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 animate-on-scroll"><h2 class="text-3xl font-bold text-stone-800">How It Works</h2><p class="text-stone-500 mt-2">Simple as 1-2-3.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                    <div class="flex flex-col items-center transition-transform duration-300 hover:-translate-y-2 animate-on-scroll"><div class="bg-emerald-100 rounded-full p-5 mb-4 shadow-inner"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg></div><h3 class="text-xl font-bold mb-2">1. Shops Post Deals</h3><p class="text-stone-600">Local stores list surplus food that's perfectly good to eat.</p></div>
+                    <div class="flex flex-col items-center transition-transform duration-300 hover:-translate-y-2 animate-on-scroll" style="transition-delay: 150ms;"><div class="bg-emerald-100 rounded-full p-5 mb-4 shadow-inner"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></div><h3 class="text-xl font-bold mb-2">2. You Find Bargains</h3><p class="text-stone-600">Browse and discover amazing deals on food near you.</p></div>
+                    <div class="flex flex-col items-center transition-transform duration-300 hover:-translate-y-2 animate-on-scroll" style="transition-delay: 300ms;"><div class="bg-emerald-100 rounded-full p-5 mb-4 shadow-inner"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg></div><h3 class="text-xl font-bold mb-2">3. Save Food & Money</h3><p class="text-stone-600">Enjoy your purchase, knowing you've made a difference.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Section -->
+        <section id="form-section" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-stone-200 animate-on-scroll">
+                    <h2 class="text-4xl font-serif font-bold text-stone-800 mb-2 text-center">Have Surplus Food?</h2>
+                    <p class="text-stone-500 mb-8 text-center max-w-2xl mx-auto">List your near-expiry products here. It's quick, easy, and great for the community.</p>
+                    <form id="deal-form" class="space-y-6 max-w-4xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input type="text" id="productName" placeholder="Product Name (e.g., Loaf of Bread)" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none transition" required>
+                            <input type="text" id="shopName" placeholder="Your Shop's Name" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none transition" required>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input type="number" id="originalPrice" placeholder="Original Price (₹)" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none transition" required>
+                            <input type="number" id="discountedPrice" placeholder="Discounted Price (₹)" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none transition" required>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <select id="category" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-500 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition" required>
+                                <option value="" disabled selected>Select a Category</option><option value="Bakery">Bakery</option><option value="Produce">Produce</option><option value="Dairy">Dairy</option><option value="Meat">Meat</option><option value="Packaged Goods">Packaged Goods</option><option value="Other">Other</option>
+                            </select>
+                            <input type="date" id="expiryDate" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-lg text-stone-500 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition" required>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-500 text-white font-bold py-4 px-6 rounded-lg hover:bg-emerald-600 focus:outline-none focus:ring-4 focus:ring-emerald-300 disabled:bg-emerald-300 transition-all duration-300 ease-in-out transform hover:-translate-y-1 active:translate-y-0.5 shadow-lg hover:shadow-xl">Post Deal Now</button>
+                    </form>
+                    <div id="form-message" class="mt-4 text-center"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deals Section -->
+        <section id="deals-section" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 animate-on-scroll"><h2 class="text-4xl font-serif font-bold text-stone-800">🔥 Hot Deals Available Now</h2><p class="text-stone-500 mt-2">Grab them before they're gone!</p></div>
+                <div id="deal-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- This area is intentionally left empty! JavaScript will fill it. -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 mt-8 text-stone-500 text-sm bg-white border-t border-stone-200">
+        <p class="font-bold text-emerald-600 text-lg mb-2 font-serif">Daily Dish</p>
+        <p>Connecting communities and reducing food waste.</p>
+        <p class="mt-4">&copy; 2025 Daily Dish. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Link to our Firebase App Logic -->
+    <!-- This now points to the correct file name! -->
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>
